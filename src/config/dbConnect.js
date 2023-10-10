@@ -2,7 +2,7 @@ import mongoose, { mongo } from "mongoose";
 
 // função assincrona
 async function conectaDatabase() {
-mongoose.connect("mongodb+srv://adminMaster:admin123@cluster0.bvvsj3w.mongodb.net/livraria?retryWrites=true&w=majority");
+mongoose.connect(process.env.DB_CONNECTION_STRING);
 
 return mongoose.connection;
 
