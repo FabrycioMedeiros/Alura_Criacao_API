@@ -13,4 +13,4 @@ const livro = mongoose.model("livros", livroSchema);
 
 export default livro;
 
-// ,odelo é um objeto que representa uma coleção na base de dados
+// modelo é um objeto que representa uma coleção na base de dados
