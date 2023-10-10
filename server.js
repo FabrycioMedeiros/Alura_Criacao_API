@@ -1,12 +1,20 @@
-import http from "http";
+//import http from "http";
+import app from "./src/app.js";
 
 const PORT = 3000;
 
-const server = http.createServer((req, resizeBy) =>{
-    res.writeHead(200, { "Content-Type": "text/plain"});
-    res.end("Curso de Node.js");
-});
+const rotas = {
+    "/": "Curso de Express API",
+    "/livros": "Entrei na rota livros",
+    "/autores": "Entrei na rota autores"
+    
+};
 
-server.listen(PORT, () =>{
+// const server = http.createServer((req, res) =>{
+//     res.writeHead(200, { "Content-Type": "text/plain"});
+//     res.end(rotas[req.url]);
+// });
+
+app.listen(PORT, () => {
 console.log("servidor escutando!");
 })
