@@ -1,5 +1,7 @@
 import express  from "express";
 import conectaDatabase from "./config/dbConnect.js";
+import livro from "./models/Livro.js";
+
 // instancia da conexão 
 const conexao = await conectaDatabase();
 
@@ -15,29 +17,13 @@ conexao.once("open", () =>{
 const app = express();
 app.use(express.json());
 
-const livros = [
-    {
-        id: 1,
-        titulo: "O Senhor dos Anéis"
-    },
-    {
-        id: 2,
-        titulo: "O Hobbit"
-    }
-]
-
-function buscalivro(id) {
-return livros.findIndex(livro => {
-    return livro.id === Number(id);
-})
-}
-
 app.get("/", (req, res) => {
     res.status(200).send("Curso de Node.js");
 });
-
-app.get("/livros", (req, res) => {
-    res.status(200).json(livros);
+// Antes de usar await dentro de uma função, usamos async antes de (req, res)para operação assincrona funcionar
+app.get("/livros", async (req, res) => {
+    const listaLivros = await livro.find({});
+    res.status(200).json(listaLivros);
 });
 
 app.get("/livros/:id", (req, res) => {
