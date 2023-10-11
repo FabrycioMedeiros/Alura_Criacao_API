@@ -7,7 +7,7 @@ class LivroController {
 static async listarLivros (req, res) {
     try{
 // controller chama o model Livro através do método livro.find({})
-     const listaLivros = await livro.find({});
+    const listaLivros = await livro.find({});
      res.status(200).json(listaLivros);
     } catch (erro) {
     res.status(500).json({ message: `${erro.message} - falha na requisição` });
@@ -16,8 +16,8 @@ static async listarLivros (req, res) {
 
 static async listarLivroPorId (req, res) {
     try{
-     const id = req.params.id;
-     const livroEncontrado = await livro.findById(id);
+    const id = req.params.id;
+    const livroEncontrado = await livro.findById(id);
      res.status(200).json(livroEncontrado);
     } catch (erro) {
     res.status(500).json({ message: `${erro.message} - falha na requisição do livro` });
@@ -26,7 +26,7 @@ static async listarLivroPorId (req, res) {
 
 static async cadastrarLivro (req, res) {
     const novoLivro = req.body;
-   try{
+    try{
     const autorEncontrado = await autor.findById(novoLivro.autor);
     const livroCompleto = { ...novoLivro, autor: { ...autorEncontrado._doc }};
     const livroCriado = await livro.create(livroCompleto);
@@ -37,7 +37,7 @@ static async cadastrarLivro (req, res) {
 };
 
 static async atualizarLivroPorId (req, res) {
-    try{
+     try{
      const id = req.params.id;
      await livro.findByIdAndUpdate(id, req.body);
      res.status(200).json({ message: "livro atualizado" });
@@ -47,7 +47,7 @@ static async atualizarLivroPorId (req, res) {
 };
 
 static async excluirLivro (req, res) {
-    try{
+     try{
      const id = req.params.id;
      await livro.findByIdAndDelete(id);
      res.status(200).json({ message: "livro excluido com sucesso" });
@@ -56,6 +56,17 @@ static async excluirLivro (req, res) {
     } 
 };
 
+ static async listarLivrosPorEditora (req, res) {
+    const editora = req.query.editora;
+    try {                                    
+    const livrosPorEditora = await livro.find({ editora: editora });
+    res.status(200).json(livrosPorEditora);
+   } catch (erro) {
+    res.status(500).json({ message: `${erro.message} - falha na busca` });
+   }
+ //{ editora: editora } a primeira é a própria propriedade, e a segunda é a informação chegando via parametro.
 };
 
-export default LivroController;
+};
+
+ export default LivroController;
