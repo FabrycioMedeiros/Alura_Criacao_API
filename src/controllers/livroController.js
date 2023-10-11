@@ -1,6 +1,6 @@
 // importação do modelo Livro para ser chamado pelo controller
 import livro from "../models/Livro.js";
-import { autor } from "../models/Autor.js"
+import { autor } from "../models/Autor.js";
 
 class LivroController {
 
