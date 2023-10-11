@@ -1,6 +1,6 @@
 import express  from "express";
 import conectaDatabase from "./config/dbConnect.js";
-import livro from "./models/Livro.js";
+import routes from "./routes/index.js";
 
 // instancia da conexão 
 const conexao = await conectaDatabase();
@@ -15,11 +15,8 @@ conexao.once("open", () =>{
 })
 
 const app = express();
-app.use(express.json());
+routes(app);
 
-app.get("/", (req, res) => {
-    res.status(200).send("Curso de Node.js");
-});
 // Antes de usar await dentro de uma função, usamos async antes de (req, res)para operação assincrona funcionar pois em caso de funções callback, a palavra-chave async deve ser adicionada antes dos parâmetros e await antes da instrução da variável.
 
 app.get("/livros/:id", (req, res) => {
