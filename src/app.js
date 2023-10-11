@@ -17,24 +17,6 @@ conexao.once("open", () =>{
 const app = express();
 routes(app);
 
-// Antes de usar await dentro de uma função, usamos async antes de (req, res)para operação assincrona funcionar pois em caso de funções callback, a palavra-chave async deve ser adicionada antes dos parâmetros e await antes da instrução da variável.
-
-app.get("/livros/:id", (req, res) => {
-   const index = buscalivro(req.params.id);
-   res.status(200).json(livros[index]);
-});
-
-app.post("/livros", (req, res) => {
-    livros.push(req.body);
-    res.status(201).send("Livro cadastrado com sucesso");
-});
-
-app.put("/livros/:id", (req, res) => {
-    const index = buscalivro(req.params.id);
-    livros[index].titulo = req.body.titulo;
-    res.status(200).json(livros);
-});
-
 app.delete("/livros/:id", (req, res) => {
     const index = buscalivro(req.params.id);
     livros.splice(index, 1);
@@ -43,3 +25,4 @@ app.delete("/livros/:id", (req, res) => {
 
 export default app;
 
+// Antes de usar await dentro de uma função, usamos async antes de (req, res)para operação assincrona funcionar pois em caso de funções callback, a palavra-chave async deve ser adicionada antes dos parâmetros e await antes da instrução da variável.
